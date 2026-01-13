@@ -24,7 +24,9 @@ packages:
       - version_constraint: "true"
         asset: smithy-cli-{{.OS}}-{{.Arch}}.{{.Format}}
         format: zip
-        windows_arm_emulation: true
+        supported_envs:
+          - linux
+          - darwin
         replacements:
           amd64: x86_64
           arm64: aarch64
@@ -32,7 +34,3 @@ packages:
           type: github_release
           asset: "{{.Asset}}.sha256"
           algorithm: sha256
-        overrides:
-          - goos: windows
-            replacements:
-              amd64: x64
