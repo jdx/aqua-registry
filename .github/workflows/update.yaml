@@ -1,7 +1,13 @@
 ---
 name: Update packages by aqua-registry-updater
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      package:
+        type: string
+        description: "Package name"
+        default: ""
+        required: false
   schedule:
     - cron: "*/10 * * * *"
 
@@ -17,10 +23,12 @@ jobs:
     permissions:
       packages: write
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-      - uses: aquaproj/aqua-installer@f13c5d2f0357708d85477aabe50fd3f725528745 # v3.1.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          aqua_version: v2.38.0
+          persist-credentials: false
+      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
+        with:
+          aqua_version: v2.56.5
           policy_allow: "true"
           aqua_opts: -l -a
         env:
@@ -39,6 +47,14 @@ jobs:
               "pull_requests": "write"
             }
       - run: aqua-registry-updater
+        if: inputs.package == ''
         env:
           AQUA_REGISTRY_UPDATER_CONTAINER_REGISTRY_TOKEN: ${{github.token}}
           GITHUB_TOKEN: ${{steps.generate_token.outputs.token}}
+
+      - run: aqua-registry-updater "$PKG"
+        if: inputs.package != ''
+        env:
+          AQUA_REGISTRY_UPDATER_CONTAINER_REGISTRY_TOKEN: ${{github.token}}
+          GITHUB_TOKEN: ${{steps.generate_token.outputs.token}}
+          PKG: ${{inputs.package}}

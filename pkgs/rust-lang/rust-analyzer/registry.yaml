@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aquaproj/aqua/main/json-schema/registry.json
 packages:
   - type: github_release
     repo_owner: rust-lang
@@ -140,7 +141,7 @@ packages:
           - goos: linux
             goarch: amd64
             replacements:
-              linux: unknown-linux-musl
+              linux: unknown-linux-gnu
           - goos: linux
             goarch: arm64
             replacements:

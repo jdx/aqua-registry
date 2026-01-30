@@ -1,0 +1,8 @@
+packages:
+  - name: realm/SwiftLint@0.63.2
+  - name: realm/SwiftLint
+    version: 0.59.1
+  - name: realm/SwiftLint
+    version: 0.48.0
+  - name: realm/SwiftLint
+    version: 0.40.0

@@ -1,2 +1,4 @@
 packages:
-  - name: bitwarden/clients@cli-v2024.11.1
+  - name: bitwarden/clients@cli-v2025.12.1
+  - name: bitwarden/clients
+    version: cli-v2025.5.0

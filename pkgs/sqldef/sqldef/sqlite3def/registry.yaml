@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aquaproj/aqua/main/json-schema/registry.json
 packages:
   - name: sqldef/sqldef/sqlite3def
     aliases:
@@ -5,7 +6,7 @@ packages:
     type: github_release
     repo_owner: sqldef
     repo_name: sqldef
-    description: Idempotent schema management for MySQL, PostgreSQL, and more
+    description: Idempotent schema management for SQLite3
     asset: sqlite3def_{{.OS}}_{{.Arch}}.{{.Format}}
     files:
       - name: sqlite3def

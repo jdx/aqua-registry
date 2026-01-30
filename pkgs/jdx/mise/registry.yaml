@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aquaproj/aqua/main/json-schema/registry.json
 packages:
   - type: github_release
     repo_owner: jdx
@@ -35,6 +36,8 @@ packages:
         supported_envs:
           - linux
           - darwin
+      - version_constraint: semver(">= 2025.7.13, <= 2025.7.15")
+        no_asset: true
       - version_constraint: "true"
         asset: mise-{{.Version}}-{{.OS}}-{{.Arch}}-musl.{{.Format}}
         format: tar.gz
