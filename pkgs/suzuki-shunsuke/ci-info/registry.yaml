@@ -46,7 +46,11 @@ packages:
               - https://github.com/suzuki-shunsuke/ci-info/releases/download/{{.Version}}/ci-info_{{trimV .Version}}_checksums.txt.sig
               - --certificate
               - https://github.com/suzuki-shunsuke/ci-info/releases/download/{{.Version}}/ci-info_{{trimV .Version}}_checksums.txt.pem
-      - version_constraint: "true"
+              - --certificate-github-workflow-repository
+              - suzuki-shunsuke/ci-info
+              - --certificate-github-workflow-ref
+              - refs/tags/{{.Version}}
+      - version_constraint: semver("<= 2.4.3")
         asset: ci-info_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
         format: tar.gz
         slsa_provenance:
@@ -65,3 +69,27 @@ packages:
               - "https://github\\.com/suzuki-shunsuke/go-release-workflow/\\.github/workflows/release\\.yaml@.*"
               - --certificate-oidc-issuer
               - "https://token.actions.githubusercontent.com"
+              - --certificate-github-workflow-repository
+              - suzuki-shunsuke/ci-info
+              - --certificate-github-workflow-ref
+              - refs/tags/{{.Version}}
+      - version_constraint: "true"
+        asset: ci-info_{{trimV .Version}}_{{.OS}}_{{.Arch}}.{{.Format}}
+        format: tar.gz
+        checksum:
+          type: github_release
+          asset: ci-info_{{trimV .Version}}_checksums.txt
+          algorithm: sha256
+          cosign:
+            bundle:
+              type: github_release
+              asset: ci-info_{{trimV .Version}}_checksums.txt.bundle
+            opts:
+              - --certificate-identity-regexp
+              - "https://github\\.com/suzuki-shunsuke/go-release-workflow/\\.github/workflows/release\\.yaml@.*"
+              - --certificate-oidc-issuer
+              - "https://token.actions.githubusercontent.com"
+              - --certificate-github-workflow-repository
+              - suzuki-shunsuke/ci-info
+              - --certificate-github-workflow-ref
+              - refs/tags/{{.Version}}

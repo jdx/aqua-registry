@@ -1,5 +1,13 @@
 packages:
-  - name: Byron/dua-cli@v2.33.0
+  - name: Byron/dua-cli@v2.45.1
+  - name: Byron/dua-cli
+    version: v2.39.0
+  - name: Byron/dua-cli
+    version: v2.38.0
+  - name: Byron/dua-cli
+    version: v2.37.1
+  - name: Byron/dua-cli
+    version: v2.37.0
   - name: Byron/dua-cli
     version: v2.31.0
   - name: Byron/dua-cli

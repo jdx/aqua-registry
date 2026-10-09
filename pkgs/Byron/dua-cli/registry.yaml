@@ -4,6 +4,7 @@ packages:
     repo_owner: Byron
     repo_name: dua-cli
     description: View disk space usage and delete unwanted data, fast
+    version_filter: not (Version startsWith "dua-core-")
     files:
       - name: dua
     version_constraint: "false"
@@ -137,7 +138,7 @@ packages:
         supported_envs:
           - darwin
           - linux
-      - version_constraint: "true"
+      - version_constraint: semver("<= 2.37.0")
         asset: dua-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}
         format: tar.gz
         rosetta2: true
@@ -156,3 +157,51 @@ packages:
               arm64: aarch64
           - goos: windows
             format: zip
+      - version_constraint: Version == "v2.37.1"
+        asset: dua-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}
+        format: tar.gz
+        rosetta2: true
+        files:
+          - name: dua
+            src: "{{.AssetWithoutExt}}/dua"
+        replacements:
+          amd64: x86_64
+          arm64: aarch64
+          darwin: apple-darwin
+          linux: unknown-linux-musl
+          windows: pc-windows-msvc
+        overrides:
+          - goos: windows
+            format: zip
+      - version_constraint: semver("<= 2.39.0")
+        asset: dua-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}
+        format: tar.gz
+        files:
+          - name: dua
+            src: "{{.AssetWithoutExt}}/dua"
+        replacements:
+          amd64: x86_64
+          arm64: aarch64
+          darwin: apple-darwin
+          linux: unknown-linux-musl
+          windows: pc-windows-msvc
+        overrides:
+          - goos: windows
+            format: zip
+      - version_constraint: "true"
+        asset: dua-{{.Version}}-{{.Arch}}-{{.OS}}.{{.Format}}
+        format: tar.gz
+        files:
+          - name: dua
+            src: "{{.AssetWithoutExt}}/dua"
+        replacements:
+          amd64: x86_64
+          arm64: aarch64
+          darwin: apple-darwin
+          linux: unknown-linux-musl
+          windows: pc-windows-msvc
+        overrides:
+          - goos: windows
+            format: zip
+        github_artifact_attestations:
+          signer_workflow: Byron/dua-cli/.github/workflows/release.yml
